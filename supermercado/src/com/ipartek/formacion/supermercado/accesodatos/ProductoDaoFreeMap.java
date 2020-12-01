@@ -40,8 +40,8 @@ public class ProductoDaoFreeMap implements Dao<Producto>{
 		return INSTANCIA;
 	}
 	
-	//FIN DE SINGLETON
 	
+	// FIN SINGLETON
 
 	@Override
 	public Iterable<Producto> obtenerTodos() {
@@ -49,7 +49,7 @@ public class ProductoDaoFreeMap implements Dao<Producto>{
 	}
 
 	@Override
-	public Producto obtenerPorId(Long id) {
+	public Producto obtenerPorId(long id) {
 		return productos.get(id);
 	}
 
@@ -63,12 +63,14 @@ public class ProductoDaoFreeMap implements Dao<Producto>{
 	@Override
 	public void modificar(Producto producto) {
 		productos.put(producto.getId(), producto);
-		
 	}
 
 	@Override
 	public void eliminar(long id) {
 		productos.remove(id);
 	}
-
+	
 }
+	
+
+	
