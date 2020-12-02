@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.supermercado.accesodatos.Dao;
-import com.ipartek.formacion.supermercado.accesodatos.ProductoDaoFreeMap;
+import com.ipartek.formacion.supermercado.accesodatos.ProductoDaoTreeMap;
 import com.ipartek.formacion.supermercado.modelos.Producto;
 
 
@@ -18,7 +18,7 @@ public class PrincipalServlet extends HttpServlet {
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Dao<Producto> dao = ProductoDaoFreeMap.getInstancia();
+		Dao<Producto> dao = ProductoDaoTreeMap.getInstancia();
 		Iterable<Producto> productos = dao.obtenerTodos();
 		request.setAttribute("productos", productos);
 		request.getRequestDispatcher("/WEB-INF/vistas/principal.jsp").forward(request,  response);
