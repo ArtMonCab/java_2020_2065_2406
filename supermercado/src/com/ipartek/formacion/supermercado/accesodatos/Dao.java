@@ -1,12 +1,10 @@
 package com.ipartek.formacion.supermercado.accesodatos;
 
 public interface Dao<T> {
-	
 	Iterable<T> obtenerTodos();
-	T obtenerPorId(long id);
+	T obtenerPorId(Long id);
 	
-	void crear (T objeto);
+	void crear(T objeto);
 	void modificar(T objeto);
-	void eliminar(long id);
-
+	void eliminar(Long id);
 }
