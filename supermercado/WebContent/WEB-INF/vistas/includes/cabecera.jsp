@@ -4,13 +4,6 @@
 <!doctype html>
 <html lang="es">
 <head>
-<!-- Required meta tags -->
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!doctype html>
-<html lang="es">
-<head>
 
 <base href="${pageContext.request.contextPath}/" />
 <!-- Required meta tags -->
@@ -21,6 +14,8 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="css/bootstrap.min.css">
+<!-- FontAwesome -->
+<link rel="stylesheet" href="css/all.min.css">
 
 <title>Supermercado</title>
 </head>

@@ -1,4 +1,3 @@
-  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -13,7 +12,9 @@
 						estamos</a></li>
 			</ul>
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#">Facebook</a></li>
+				<li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-facebook"></i></a></li>
+				<li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-twitter"></i></a></li>
+				<li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-youtube"></i></a></li>
 			</ul>
 		</div>
 	</nav>
