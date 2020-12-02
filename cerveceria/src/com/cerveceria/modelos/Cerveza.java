@@ -15,10 +15,11 @@ public class Cerveza {
 	private Integer capacidadEnvase;
 	private Integer unidadesCaja; 
 	private String urlImagen;
+	private Integer stock;
 	
 	//Constructor
 	public Cerveza(long id, String nombre, String tipo, String pais, String descripcion, BigDecimal graduacion,
-			BigDecimal precio, String envase, Integer capacidadEnvase, Integer unidadesCaja, String urlImagen) {
+			BigDecimal precio, String envase, Integer capacidadEnvase, Integer unidadesCaja, String urlImagen, Integer stock) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -31,6 +32,7 @@ public class Cerveza {
 		this.capacidadEnvase = capacidadEnvase;
 		this.unidadesCaja = unidadesCaja;
 		this.urlImagen = urlImagen;
+		this.stock = stock;
 	}
 	
 	
@@ -120,6 +122,14 @@ public class Cerveza {
 	public void setUrlImagen(String urlImagen) {
 		this.urlImagen = urlImagen;
 	}
+	
+	public Integer getStock() {
+		return stock;
+	}
+	
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
 
 
 	@Override
@@ -137,6 +147,7 @@ public class Cerveza {
 		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		result = prime * result + ((unidadesCaja == null) ? 0 : unidadesCaja.hashCode());
 		result = prime * result + ((urlImagen == null) ? 0 : urlImagen.hashCode());
+		result = prime * result + ((stock == null) ? 0 : stock.hashCode());
 		return result;
 	}
 
@@ -202,6 +213,12 @@ public class Cerveza {
 				return false;
 		} else if (!urlImagen.equals(other.urlImagen))
 			return false;
+		
+		if (stock == null) {
+			if (other.stock != null)
+				return false;
+		} else if (!stock.equals(other.stock))
+			return false;
 		return true;
 	}
 
@@ -211,8 +228,11 @@ public class Cerveza {
 		return "Cerveza [id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + ", pais=" + pais + ", descripcion="
 				+ descripcion + ", graduacion=" + graduacion + ", precio=" + precio + ", envase=" + envase
 				+ ", capacidadEnvase=" + capacidadEnvase + ", unidadesCaja=" + unidadesCaja + ", urlImagen=" + urlImagen
-				+ "]";
+				+ ", stock=" + stock + "]";
 	}
+
+
+
 	
 	
 
