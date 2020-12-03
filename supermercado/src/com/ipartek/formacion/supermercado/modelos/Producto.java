@@ -3,7 +3,6 @@ package com.ipartek.formacion.supermercado.modelos;
 import java.math.BigDecimal;
 
 public class Producto {
-	
 	private Long id;
 	private String nombre;
 	private String descripcion;
@@ -27,78 +26,95 @@ public class Producto {
 		this.precioUnidadMedida = precioUnidadMedida;
 		this.cantidad = cantidad;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
-	
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public String getDescripcion() {
 		return descripcion;
 	}
-	
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
+
 	public String getUrlImagen() {
 		return urlImagen;
 	}
+
 	public void setUrlImagen(String urlImagen) {
 		this.urlImagen = urlImagen;
 	}
-	
+
 	public BigDecimal getPrecio() {
 		return precio;
 	}
-	
+
 	public void setPrecio(BigDecimal precio) {
 		this.precio = precio;
 	}
-	
+
 	public Integer getDescuento() {
 		return descuento;
 	}
-	
+
 	public void setDescuento(Integer descuento) {
 		this.descuento = descuento;
 	}
-	
+
 	public String getUnidadMedida() {
 		return unidadMedida;
 	}
-	
+
 	public void setUnidadMedida(String unidadMedida) {
 		this.unidadMedida = unidadMedida;
 	}
-	
+
 	public BigDecimal getPrecioUnidadMedida() {
 		return precioUnidadMedida;
 	}
-	
+
 	public void setPrecioUnidadMedida(BigDecimal precioUnidadMedida) {
 		this.precioUnidadMedida = precioUnidadMedida;
 	}
-	
+
 	public Integer getCantidad() {
 		return cantidad;
 	}
-	
+
 	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
 	
+	public BigDecimal getPrecioConDescuento() {
+
+		
+		if(descuento == null || descuento == 0) {
+			return null;
+		}
+		
+		if(descuento == 100) {
+			return BigDecimal.ZERO;
+		}
+		
+		//BigDecimal tiene otro formato para hacer operaciones
+		//return precio - (precio * (descuento / 100))
+		return precio.subtract(precio.multiply(new BigDecimal(descuento).divide(new BigDecimal(100))));
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -114,7 +130,7 @@ public class Producto {
 		result = prime * result + ((urlImagen == null) ? 0 : urlImagen.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -178,7 +194,4 @@ public class Producto {
 				+ ", precio=" + precio + ", descuento=" + descuento + ", unidadMedida=" + unidadMedida
 				+ ", precioUnidadMedida=" + precioUnidadMedida + ", cantidad=" + cantidad + "]";
 	}
-	
-	
-	
 }
