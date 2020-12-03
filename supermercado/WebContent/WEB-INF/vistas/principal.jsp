@@ -18,10 +18,22 @@
 					<h5 class="card-title">${producto.nombre}</h5>
 					<p class="card-text">${producto.descripcion}</p>
 					<p class="card-text lead row">
-						<strong class="col">${producto.precio}€</strong>
-						<small class="text-muted col text-center">${producto.precioUnidadMedida}€
-							/ ${producto.unidadMedida}</small>
-						<small class="text-muted col text-right">${producto.cantidad} en stock</small>
+						<strong class="${producto.descuento != null ? 'col-6' : 'col-12'}">
+							<c:if test="${producto.descuento != null}">
+								<del>
+							</c:if>
+							<fmt:formatNumber type="currency" value="${producto.precio}" />
+							<c:if test="${producto.descuento != null}">
+								</del>
+							</c:if>
+						</strong>
+						<c:if test="${producto.descuento != null}">
+							<strong class="col-6 text-danger text-right">
+								<fmt:formatNumber type="currency" value="${producto.precioConDescuento}" />
+							</strong>
+						</c:if>
+						<small class="text-muted col-12">(<fmt:formatNumber type="currency" value="${producto.precioUnidadMedida}" />&nbsp;/&nbsp;${producto.unidadMedida})</small>
+						<small class="text-muted col-12">${producto.cantidad} en stock</small>
 					</p>
 					<p class="card-text">
 						<div class="input-group mx-auto" style="width: 9rem">
