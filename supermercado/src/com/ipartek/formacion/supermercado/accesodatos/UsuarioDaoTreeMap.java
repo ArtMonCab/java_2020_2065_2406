@@ -8,8 +8,8 @@ public class UsuarioDaoTreeMap implements Dao<Usuario> {
 	private static TreeMap<Long, Usuario> usuarios = new TreeMap<>();
 
 	static {
-		usuarios.put(1L, new Usuario(1L, "javier@lete.com", "contra"));
-		usuarios.put(2L, new Usuario(2L, "pepe@perez.com", "perez"));
+		usuarios.put(1L, new Usuario(1L, "perico@delospalotes.com", "qwerty"));
+		usuarios.put(2L, new Usuario(2L, "pepito@perez.com", "12345"));
 	}
 
 	// SINGLETON

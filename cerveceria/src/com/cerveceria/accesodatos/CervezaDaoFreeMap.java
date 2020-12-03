@@ -13,10 +13,28 @@ public class CervezaDaoFreeMap implements Dao<Cerveza>{
 
 	//Datos de prueba
 	static {
-		for (Long id = 1L; id <= 12L; id++) {
-			cervezas.put(id, new Cerveza(id, "Producto" + id, "Descripción" + id, "foto" + id + ".jpg",
-					new BigDecimal(11 * id), id.intValue(), "Unidad" + id, new BigDecimal(10 * id), id.intValue()));
+		(Long id = 1L; id <= 12L; id++) {
+			//cervezas.put(id, new Cerveza(id, "Producto" + id, "Descripción" + id, "foto" + id + ".jpg",
+				//	new BigDecimal(11 * id), id.intValue(), "Unidad" + id, new BigDecimal(10 * id), id.intValue()));
+			cervezas.put(id, new Cerveza(id,"Cerveza" + id, "Tipo" + id, "Pais" + id, "Descripción" + id,
+					))
+			
+			/*
+			 	private long id;
+	private String nombre;
+	private String tipo;
+	private String pais;
+	private String descripcion;
+	private BigDecimal graduacion;
+	private BigDecimal precio;
+	private String envase;
+	private Integer capacidadEnvase;
+	private Integer unidadesCaja; 
+	private String urlImagen;
+	private Integer stock;
+			 */
 		}
+		
 	}
 	//SINGLETON
 	private CervezaDaoFreeMap() {}
