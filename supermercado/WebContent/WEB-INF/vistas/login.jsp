@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/vistas/includes/cabecera.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/vistas/includes/cabecera.jsp"%>
+
 <form action="login" method="post">
 	<div class="form-group row">
 		<label for="email" class="col-sm-2 col-form-label">Email</label>
@@ -23,4 +24,4 @@
 	</div>
 </form>
 
-<%@ include file="/WEB-INF/vistas/includes/pie.jsp" %>
+<%@ include file="/WEB-INF/vistas/includes/pie.jsp"%>
