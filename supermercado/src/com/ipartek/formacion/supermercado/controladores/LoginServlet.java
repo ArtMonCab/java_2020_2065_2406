@@ -1,11 +1,15 @@
 package com.ipartek.formacion.supermercado.controladores;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ipartek.formacion.supermercado.accesodatos.UsuarioDaoTreeMap;
+import com.ipartek.formacion.supermercado.modelos.Usuario;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -19,8 +23,15 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		response.setContentType("text/plain");
-		response.getWriter().println(email + ", " + password);
+		UsuarioDaoTreeMap dao = UsuarioDaoTreeMap.getInstancia();
+		Usuario usuario = dao.obtenerPorEmail(email);
+		
+		if(usuario != null && usuario.getPassword().equals(password)) {
+			request.getSession().setAttribute("usuario", usuario);
+			request.getRequestDispatcher("/principal").forward(request, response);
+		} else {
+			request.getRequestDispatcher("/WEB-INF/vistas/login.jsp").forward(request, response);
+		}
 	}
 
 }
