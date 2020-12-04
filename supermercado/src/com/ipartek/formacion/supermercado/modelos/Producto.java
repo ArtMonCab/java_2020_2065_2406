@@ -107,7 +107,7 @@ public class Producto implements Serializable{
 
 		
 		if(descuento == null || descuento == 0) {
-			return null;
+			return precio;
 		}
 		
 		if(descuento == 100) {
