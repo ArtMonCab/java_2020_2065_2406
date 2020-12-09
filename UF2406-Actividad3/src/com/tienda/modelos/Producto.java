@@ -8,51 +8,74 @@ public class Producto implements Serializable{
 	private long id;
 	private String nombre;
 	private BigDecimal precio;
-	private int unidades;
+	private int cantidad;
+	private BigDecimal total;
 	
-	
-	
-	public Producto(long id, String nombre, BigDecimal precio, int unidades) {
+	public Producto(long id, String nombre, BigDecimal precio, int cantidad, BigDecimal total) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.precio = precio;
-		this.unidades = unidades;
+		this.cantidad = cantidad;
+		this.total = total;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public BigDecimal getPrecio() {
 		return precio;
 	}
+
 	public void setPrecio(BigDecimal precio) {
 		this.precio = precio;
 	}
-	public int getUnidades() {
-		return unidades;
+
+	public int getCantidad() {
+		return cantidad;
 	}
-	public void setUnidades(int unidades) {
-		this.unidades = unidades;
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public BigDecimal getTotal() {
+		BigDecimal total;
+		if(cantidad == 0) {
+			total = new BigDecimal(0);
+		}else {
+			total = precio.multiply(new BigDecimal(cantidad));
+		}
+		
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + cantidad;
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
-		result = prime * result + unidades;
+		result = prime * result + ((total == null) ? 0 : total.hashCode());
 		return result;
 	}
 
@@ -65,6 +88,8 @@ public class Producto implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Producto other = (Producto) obj;
+		if (cantidad != other.cantidad)
+			return false;
 		if (id != other.id)
 			return false;
 		if (nombre == null) {
@@ -77,16 +102,17 @@ public class Producto implements Serializable{
 				return false;
 		} else if (!precio.equals(other.precio))
 			return false;
-		if (unidades != other.unidades)
+		if (total == null) {
+			if (other.total != null)
+				return false;
+		} else if (!total.equals(other.total))
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "Producto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", unidades=" + unidades + "]";
-	}
-
+	
+	
+	
+	
 	
 	
 

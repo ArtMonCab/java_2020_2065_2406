@@ -3,6 +3,8 @@ package com.tienda.accesodatos;
 import java.math.BigDecimal;
 import java.util.TreeMap;
 
+import org.apache.commons.lang3.SerializationUtils;
+
 import com.tienda.modelos.Producto;
 
 public class ProductoDaoTreeMap implements Dao<Producto>{
@@ -10,45 +12,55 @@ public class ProductoDaoTreeMap implements Dao<Producto>{
 	private static TreeMap<Long, Producto> productos = new TreeMap<>();
 	
 	static {
-
-
-		//Producto(long id, String nombre, BigDecimal precio, int unidades)
-		productos.put(1L, new Producto(1L,"Nombre", new BigDecimal("23,76"), 0));
 		
-		for (Long id = 1L; id <= 12L; id++) {
-			productos.put(id, new Producto(id, "Nombre + id, "Descripción" + id, "http://placeimg.com/640/480/tech?" + id,
-					new BigDecimal(11 * id), id.intValue(), "Unidad" + id, new BigDecimal(10 * id), id.intValue()));
+		for (Long id = 1L; id <= 7L; id++) {
+			productos.put(id, new Producto(id, "Producto " + id, new BigDecimal(10.34 * id), 0, new BigDecimal(0)));
+			
 		}
 		
 	}
 
+	// SINGLETON
+
+
+	private ProductoDaoTreeMap() {
+	}
+
+	private static ProductoDaoTreeMap INSTANCIA = new ProductoDaoTreeMap();
+
+	
+	public static ProductoDaoTreeMap getInstancia() {
+		return INSTANCIA;
+	}
+
+	// FIN SINGLETON
+	
 	@Override
 	public Iterable<Producto> obtenerTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return productos.values();
 	}
 
 	@Override
 	public Producto obtenerPorId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return SerializationUtils.clone(productos.get(id));
 	}
 
 	@Override
-	public void crear(Producto objeto) {
-		// TODO Auto-generated method stub
-		
+	public void crear(Producto producto) {
+		Long id = productos.size() == 0 ? 1L : productos.lastKey() + 1L;
+		producto.setId(id);
+		productos.put(id, producto);
 	}
 
 	@Override
-	public void modificar(Producto objeto) {
-		// TODO Auto-generated method stub
+	public void modificar(Producto producto) {
+		productos.put(producto.getId(), producto);
 		
 	}
 
 	@Override
 	public void eliminar(Long id) {
-		// TODO Auto-generated method stub
+		productos.remove(id);
 		
 	}
 
