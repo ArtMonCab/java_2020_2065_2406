@@ -15,7 +15,7 @@ import com.ipartek.formacion.supermercado.accesodatos.ProductoDaoTreeMap;
 import com.ipartek.formacion.supermercado.modelos.Producto;
 
 
-@WebServlet(name = "/admin/producto", urlPatterns = { "//admin/producto" })
+@WebServlet(name = "/admin/producto", urlPatterns = { "/admin/producto" })
 public class ProductoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

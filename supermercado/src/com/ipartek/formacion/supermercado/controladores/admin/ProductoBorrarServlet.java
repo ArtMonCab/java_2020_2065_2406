@@ -12,7 +12,7 @@ import com.ipartek.formacion.supermercado.accesodatos.ProductoDaoTreeMap;
 import com.ipartek.formacion.supermercado.modelos.Producto;
 
 
-@WebServlet(name = "/admin/borrar", urlPatterns = { "//admin/borrar" })
+@WebServlet(name = "/admin/borrar", urlPatterns = { "/admin/borrar" })
 public class ProductoBorrarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
