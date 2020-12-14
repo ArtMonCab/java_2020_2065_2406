@@ -11,12 +11,7 @@ public class LibroDao implements Dao<Libro>{
 	
 	private static TreeMap<Long, Libro> libros = new TreeMap<>();
 	
-	static {
-		libros.put(1L, new Libro(1L,"El Señor De los Anillos: La comunidad del Anillo", new BigDecimal("18.50"),5));
-		libros.put(2L, new Libro(2L,"El Señor De los Anillos: Las dos torres", new BigDecimal("18.50"),5));
-		libros.put(3L, new Libro(3L,"El Señor De los Anillos: El retorno del Rey", new BigDecimal("18.50"),5));
-	}
-	
+
 	// SINGLETON
 
 
@@ -51,6 +46,16 @@ public class LibroDao implements Dao<Libro>{
 		libro.setId(id);
 		libros.put(id, libro);
 		
+	}
+	
+	@Override
+	public void modificar(Libro libro) {
+		libros.put(libro.getId(), libro);
+	}
+
+	@Override
+	public void eliminar(Long id) {
+		libros.remove(id);
 	}
 
 }

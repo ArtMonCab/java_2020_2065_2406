@@ -20,14 +20,14 @@
 <!-- Datatables -->
 <link rel="stylesheet" href="css/dataTables.bootstrap4.min.css" />
 <!-- Hoja de estilos personalizada -->
-<link rel="stylesheet" href="css/supermercado.css">
+<link rel="stylesheet" href="css/libreriaUF2406.css">
 
-<title>Libreria</title>
+<title>Libreria UF24506</title>
 </head>
 <body>
 	<header class="sticky-top">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand" href="#">Supermercado</a>
+			<a class="navbar-brand" href="inicio">Libreria UF2406</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -37,7 +37,7 @@
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">Inicio
+					<li class="nav-item active"><a class="nav-link" href="inicio">Inicio
 							<span class="sr-only">(current)</span>
 					</a></li>
 				</ul>
