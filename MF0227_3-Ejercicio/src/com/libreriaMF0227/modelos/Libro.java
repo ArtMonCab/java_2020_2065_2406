@@ -18,7 +18,6 @@ public class Libro implements Serializable{
 	private String imagen;
 	
 	public Libro(int id, String nombre, BigDecimal precio, Integer descuento, String autor, String imagen) {
-		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.precio = precio;
@@ -27,18 +26,6 @@ public class Libro implements Serializable{
 		this.imagen = imagen;
 	}
 	
-	
-
-	public Libro(String nombre, BigDecimal precio, Integer descuento, String autor, String imagen) {
-		this.nombre = nombre;
-		this.precio = precio;
-		this.descuento = descuento;
-		this.autor = autor;
-		this.imagen = imagen;
-	}
-
-
-
 
 
 	public Libro() {
