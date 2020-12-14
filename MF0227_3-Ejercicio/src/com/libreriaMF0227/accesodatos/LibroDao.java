@@ -14,7 +14,7 @@ public class LibroDao implements Dao<Libro>{
 	private int indice = 0;
 	private static LibroDao INSTANCE = null;
 	
-	private LibroDao(){
+	public LibroDao(){
 		hmLibros.put(1, new Libro(1,"Los futbolisimos. El misterio del jugador número 13", new BigDecimal("11.95"),5,"Roberto Santiago","images/futbolisimos1.png"));
 		hmLibros.put(2,new Libro(2,"Los futbolisimos. El misterio del obelisco mágico", new BigDecimal("11.95"),5,"Roberto Santiago","images/futbolisimos2.png"));
 		hmLibros.put(3,new Libro(3,"Los futbolisimos. El misterio del día de los inocentes", new BigDecimal("11.95"),5,"Roberto Santiago","images/futbolisimos3.png"));

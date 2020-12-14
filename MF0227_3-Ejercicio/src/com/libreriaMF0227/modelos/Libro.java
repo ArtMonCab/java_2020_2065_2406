@@ -41,6 +41,12 @@ public class Libro implements Serializable{
 
 
 
+	public Libro() {
+		super();
+	}
+
+
+
 	public int getId() {
 		return id;
 	}

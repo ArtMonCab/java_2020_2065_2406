@@ -10,15 +10,19 @@ import com.libreriaMF0227.modelos.Libro;
 
 public class AppLibreria {
 	
-	static private ArrayList<Libro> lista = new ArrayList<Libro>();
-	static private Scanner sc = new Scanner(System.in);
+	
+	
 	//Variables globales
+	static String opcion = "";   // opcion seleccionada en el menu por el usuario
+	static private LibroDao libroDao = new LibroDao();
+	static private ArrayList<Libro> lista = new ArrayList<Libro>();
 
+	static private Scanner sc = new Scanner(System.in);
 	
 	static private LibroDao book = LibroDao.getInstance();
 	
 	
-	static String opcion = "";
+
 	
 	//Constantes
 	static final private String OP_LISTAR = "1";
@@ -90,12 +94,25 @@ public class AppLibreria {
 	}
 	
 	private static void alta() {
+		Libro liburu = new Libro();
 		boolean repetir = true;
+		
+		//Compruebo que el ID es correcto
+		do {
+			try {
+				System.out.println("Introduce el ID del libro: ");
+				liburu.setId(Integer.parseInt(sc.nextLine()));
+				repetir = false;
+			}catch (Exception E){
+				System.out.println("El ID debe ser un numero entero");
+				repetir = true;
+			}
+		}while(repetir);
 		
 		do {
 			System.out.println("Introduce el titulo del nuevo libro:");
-			String titulo = sc.nextLine();
-			if ((titulo.length() < 2) || (titulo.length() > 150)) {
+			liburu.setNombre(sc.nextLine());
+			if ((liburu.getNombre().length() < 2) || (liburu.getNombre().length() > 150)) {
 				System.out.println("El título del libro debe tener de 2 a 150 caracteres.");
 			}else {
 				repetir = false;
@@ -111,7 +128,7 @@ public class AppLibreria {
 		do {
 			try{
 				System.out.println("Introduce el precio del nuevo libro:");
-				BigDecimal precio = new BigDecimal(sc.nextLine());
+				liburu.setPrecio(new BigDecimal(sc.nextLine()));
 				repetir = false;
 			} catch(Exception e) {
 				System.out.println("El precio debe ser un número. Vuelva a introducirlo");
@@ -126,8 +143,8 @@ public class AppLibreria {
 		do {
 			try {
 				System.out.println("Introduce el descuento del nuevo libro:");
-				int descuento =  Integer.valueOf(sc.nextLine());
-				if ((descuento >= 0) && (descuento <= 100)) {
+				liburu.setDescuento(Integer.parseInt(sc.nextLine()));
+				if ((liburu.getDescuento() >= 0) && (liburu.getDescuento() <= 100)) {
 					repetir = false;
 				}else {
 					System.out.println("El descuento debe ser un número entre 0 y 100. Vuelva a introducirlo");
@@ -142,12 +159,17 @@ public class AppLibreria {
 		
 		//Si el autor es nulo, pongo "anónimo" por defecto
 		System.out.println("Introduce el autor del nuevo libro:");
-		String autor = sc.nextLine();
+		liburu.setAutor(sc.nextLine());
 		
 		System.out.println("Introduce la URL de la imagen del nuevo libro:");
-		String imagen = sc.nextLine();
+		liburu.setImagen(sc.nextLine());
 		
-		Libro libroNuevo = new()
+		if(libroDao.crear(liburu)) {
+			System.out.println ("Libro introducido correctamente");
+		}else {
+			System.out.println("No se ha podido dar de alta el libro porque alguno de sus valores no es correcto");
+		
+		}
 		
 		
 	}
