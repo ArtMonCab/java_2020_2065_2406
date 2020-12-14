@@ -28,8 +28,12 @@ public class LoginServlet extends HttpServlet {
 		
 		if(usuario != null && usuario.getPassword().equals(password)) {
 			request.getSession().setAttribute("usuario", usuario);
-			request.getRequestDispatcher("/principal").forward(request, response);
+			//request.getRequestDispatcher("/admin/index").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/admin/index");
 		} else {
+			request.setAttribute("alertaTexto", "El usuario o la contraseña son incorrectos");
+			request.setAttribute("alertaNivel", "danger");
+			
 			request.getRequestDispatcher("/WEB-INF/vistas/login.jsp").forward(request, response);
 		}
 	}
