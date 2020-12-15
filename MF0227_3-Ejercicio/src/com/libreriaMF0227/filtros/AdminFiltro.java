@@ -16,9 +16,7 @@ import com.libreriaMF0227.modelos.Usuario;
 
 
 
-/**
- * Servlet Filter implementation class AdminFiltro
- */
+
 @WebFilter(filterName = "admin/*", urlPatterns = { "/admin/*" })
 public class AdminFiltro implements Filter {
 

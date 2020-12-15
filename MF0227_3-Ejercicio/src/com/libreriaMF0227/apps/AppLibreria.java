@@ -24,9 +24,7 @@ public class AppLibreria {
 	
 	public static void main(String[] args) {
 
-		
-		inicializarDatos();
-		
+			
 		
 		boolean salir = false;
 		
@@ -146,6 +144,7 @@ public class AppLibreria {
 		String precio = "0";
 		int descuento = 0;
 		String autor = "Anónimo";
+		String url = "img/default.png";
 		
 		//Compruebo que el ID es correcto
 		do {
@@ -233,7 +232,12 @@ public class AppLibreria {
 
 		//Meto la URL de la imagen del libro
 		System.out.println("Introduce la url de la imagen: ");
-		liburu.setImagen(sc.nextLine());
+		url = sc.nextLine();
+		if (autor.isEmpty()) {
+			liburu.setImagen("img/default.png");
+		}else {
+			liburu.setImagen(autor);
+		}
 		
 		
 		//Indroduzco el libro

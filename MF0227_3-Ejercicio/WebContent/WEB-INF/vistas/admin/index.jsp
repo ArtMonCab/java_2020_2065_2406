@@ -12,8 +12,8 @@
 				<th scope="col">Imagen</th>
 				<th scope="col">Precio</th>
 				<th scope="col">Descuento</th>
-				<th scope="col">Precio</th>
 				<th scope="col">Autor</th>
+				<th scope="col">Opciones</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -21,7 +21,7 @@
 				<tr>
 					<th scope="row">${libro.id}</th>
 					<td>${libro.nombre}</td>
-					<td><img src="${libro.imagen}" alt="" style="height: 3em" /></td>
+					<td><img src="${libro.imagen}" alt="img/default.png" style="height: 3em" /></td>
 					<td><fmt:formatNumber type="currency" value="${libro.precio}" /></td>
 					<td><fmt:formatNumber type="percent" value="${libro.descuento / 100}" /></td>
 					<td>${libro.autor}</td>
@@ -38,6 +38,6 @@
 	</table>
 	
 	<p>
-		<a class="btn btn-primary" href="admin/producto">Añadir libro</a> 
+		<a class="btn btn-primary" href="admin/libro">Añadir libro</a> 
 	</p>
 </div>

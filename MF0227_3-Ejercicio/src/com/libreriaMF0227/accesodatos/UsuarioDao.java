@@ -62,4 +62,10 @@ public class UsuarioDao implements Dao<Usuario>{
 		return null;
 	}
 
+	@Override
+	public void modify(Usuario usuario) {
+		usuarios.put(usuario.getId(), usuario);
+		
+	}
+
 }

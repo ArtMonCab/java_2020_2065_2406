@@ -9,6 +9,7 @@ public class Libro implements Serializable{
 	private static final long serialVersionUID = 5452816664057554386L;
 	
 	public static final String AUTOR_POR_DEFECTO = "Anónimo";
+	public static final String IMAGEN_POR_DEFECTO = "img/default.png";
 	
 	private int id;
 	private String nombre;
@@ -16,6 +17,58 @@ public class Libro implements Serializable{
 	private Integer descuento;
 	private String autor;
 	private String imagen;
+	
+	private boolean correcto = true;
+
+	private String errorId;
+	private String errorNombre;
+	private String errorPrecio;
+	private String errorDescuento;
+	private String errorAutor;
+	private String errorImagen;
+	
+	public Libro(String id, String nombre, String precio, String descuento, String autor, String imagen) {
+		setId(id);
+		setNombre(nombre);
+		setPrecio(precio);
+		setDescuento(descuento);
+		setAutor(autor);
+		setImagen(imagen);
+	}
+
+
+	private void setId(String id) {
+		try {
+			setId(id.trim().length() != 0 ? Integer.parseInt(id) : null);
+		} catch (NumberFormatException e) {
+			setErrorId("El id debe ser numérico");
+		}
+	}
+
+
+	private void setPrecio(String precio) {
+		try {
+			if ((precio.matches("\\d+.\\d\\d")) || (precio.matches("\\d+"))){
+				setPrecio(new BigDecimal(precio));
+			}else {
+				setErrorPrecio("El precio debe tener el formato correcto y a lo sumo 2 decimales");
+			}
+			
+		} catch (Exception e) {
+			setErrorPrecio("El precio no tiene un formato correcto");
+		}
+	}
+
+
+
+	private void setDescuento(String descuento) {
+		try {
+			setDescuento(Integer.parseInt(descuento));
+		} catch (NumberFormatException e) {
+			setErrorDescuento("El descuento debe ser un número entero");
+		}
+	}
+	
 	
 	public Libro(int id, String nombre, BigDecimal precio, Integer descuento, String autor, String imagen) {
 		this.id = id;
@@ -88,7 +141,98 @@ public class Libro implements Serializable{
 	}
 
 	public void setImagen(String imagen) {
-		this.imagen = imagen;
+		
+		if ( imagen != null ) {
+			
+			if ( imagen.trim().isEmpty() ) {
+				imagen = IMAGEN_POR_DEFECTO;
+			}
+			this.imagen = imagen;
+			
+		}else {
+			this.imagen =  IMAGEN_POR_DEFECTO;
+		}
+		
+	}
+
+	public boolean isCorrecto() {
+		return correcto;
+	}
+	
+	public void setCorrecto(boolean correcto) {
+		this.correcto = correcto;
+	}
+
+	public String getErrorId() {
+		return errorId;
+	}
+
+
+
+	public void setErrorId(String errorId) {
+		this.errorId = errorId;
+	}
+
+
+
+	public String getErrorNombre() {
+		return errorNombre;
+	}
+
+
+
+	public void setErrorNombre(String errorNombre) {
+		this.errorNombre = errorNombre;
+	}
+
+
+
+	public String getErrorPrecio() {
+		return errorPrecio;
+	}
+
+
+
+	public void setErrorPrecio(String errorPrecio) {
+		correcto = false;
+		this.errorPrecio = errorPrecio;
+	}
+
+
+
+	public String getErrorDescuento() {
+		return errorDescuento;
+	}
+
+
+
+	public void setErrorDescuento(String errorDescuento) {
+		correcto = false;
+		this.errorDescuento = errorDescuento;
+	}
+
+
+
+	public String getErrorAutor() {
+		return errorAutor;
+	}
+
+
+
+	public void setErrorAutor(String errorAutor) {
+		this.errorAutor = errorAutor;
+	}
+
+
+
+	public String getErrorImagen() {
+		return errorImagen;
+	}
+
+
+
+	public void setErrorImagen(String errorImagen) {
+		this.errorImagen = errorImagen;
 	}
 
 

@@ -2,6 +2,7 @@ package com.libreriaMF0227.controladores.admin;
 
 import java.io.IOException;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,12 +15,12 @@ import com.libreriaMF0227.accesodatos.LibroDao;
 import com.libreriaMF0227.modelos.Libro;
 
 
-
-@WebServlet(name = "/admin/libro", urlPatterns = { "//admin/libro" })
+@WebServlet(name = "admin/libro", urlPatterns = { "/admin/libro" })
 public class LibroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
+	private static final Logger LOGGER = Logger.getLogger(LibroServlet.class.getName());
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. Recoger información de la petición
 
@@ -39,7 +40,7 @@ public class LibroServlet extends HttpServlet {
 		}
 
 		// 5. Redirigir a otra vista
-		request.getRequestDispatcher("/WEB-INF/vistas/admin/producto.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/vistas/admin/libro.jsp").forward(request, response);
 	}
 
 
@@ -49,23 +50,17 @@ public class LibroServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		// 1. Recoger información de la petición
-
+/*
 		String id = request.getParameter("id");
 		String nombre = request.getParameter("nombre");
 		String precio = request.getParameter("precio");
 		String descuento = request.getParameter("descuento");
-		String autor = request.getParameter("descripcion");
+		String autor = request.getParameter("autor");
 		String imagen = request.getParameter("imagen");
-		
-		
-		String cantidad = request.getParameter("cantidad");
-		String unidadMedida = request.getParameter("unidad-medida");
-		String precioUnidadMedida = request.getParameter("precio-unidad-medida");
-		
 
 		// 2. Poner información dentro de un modelo
 
-		Libro libro = new Libro(id, nombre, precio, descuento, autor, imagen);
+		Libro libro = new Libro(id, nombre, precio, descuento,autor,imagen);
 
 		LOGGER.log(Level.INFO, libro.toString());
 
@@ -75,24 +70,23 @@ public class LibroServlet extends HttpServlet {
 			// 4. Generar modelo para la vista
 			request.setAttribute("libro", libro);
 			// 5. Redirigir a otra vista
-			request.getRequestDispatcher("/WEB-INF/vistas/admin/producto.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/vistas/libro.jsp").forward(request, response);
 			return;
 		}
 
-		Dao<Libro> dao = Libro.getInstance();
+		Dao<Libro> dao = LibroDao.getInstance();
 
 		String mensaje;
-
-		if (libro.getId() == null) {
+		((if (libro.getId() == null) {
 			// Si no está rellenado el id, es que queremos añadir
-			dao.crear(libro);
+			dao.insert(libro);
 
-			mensaje = "Se ha creado el producto correctamente";
+			mensaje = "Se ha insertado el libro correctamente";
 		} else {
 			// Si está rellenado el id, es que queremos modificar
-			dao.modificar(libro);
+			dao.modify(libro);
 
-			mensaje = "Se ha modificado el producto correctamente";
+			mensaje = "Se ha modificado el libro correctamente";
 		}
 
 		// 4. Generar modelo para la vista
@@ -101,9 +95,9 @@ public class LibroServlet extends HttpServlet {
 		request.setAttribute("alertaNivel", "success");
 
 		// 5. Redirigir a otra vista
-
-		request.getRequestDispatcher("/admin/index").forward(request, response);
-	}
+*/
+		request.getRequestDispatcher("/inicio").forward(request, response);
 	}
 
 }
+

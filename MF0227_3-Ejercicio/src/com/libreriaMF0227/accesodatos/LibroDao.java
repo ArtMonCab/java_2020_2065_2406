@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-
 import com.libreriaMF0227.modelos.Libro;
 
 public class LibroDao implements Dao<Libro>{
@@ -121,5 +120,9 @@ public class LibroDao implements Dao<Libro>{
 		return centinela;
 	}
 
+	@Override
+	public void modify(Libro libro) {
+		hmLibros.put(libro.getId(), libro);
+	}
 }
 

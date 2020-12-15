@@ -14,6 +14,7 @@ public interface Dao<T> {
 	boolean delete(int id);
 
 	boolean insert(T objeto);
+	void modify(T objeto);
 	
 }
 

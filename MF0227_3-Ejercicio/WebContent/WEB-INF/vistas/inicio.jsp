@@ -9,7 +9,7 @@
 			<div class="col mb-4">
 				<div class="card h-100">
 					
-					<img src="${libro.imagen}" class="card-img-top" alt="">
+					<img src="${libro.imagen}" class="card-img-top" alt="img/default.png">
 					
 
 					<div class="card-body">
@@ -20,7 +20,9 @@
 							<strong><h6>${libro.autor}</h6></strong>
 						</p>
 					</div>
-
+					<div class="card-footer bg-primary p-0">
+						<a href="inicio" class="btn btn-block text-white">Ver detalles</a>
+					</div>
 				</div>
 			</div>
 		</c:forEach>

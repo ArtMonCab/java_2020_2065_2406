@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.libreriaMF0227.accesodatos.LibroDao;
 
 
-@WebServlet(name = "/admin/index", urlPatterns = { "//admin/index" })
+@WebServlet("/admin/index")
 public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
