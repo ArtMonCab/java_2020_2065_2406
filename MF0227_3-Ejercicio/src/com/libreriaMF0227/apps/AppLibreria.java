@@ -1,6 +1,7 @@
 package com.libreriaMF0227.apps;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -141,7 +142,7 @@ public class AppLibreria {
 		Libro liburu = new Libro();
 		boolean repetir = true;
 		String titulo = null;
-		String precio = "0";
+		String precio = null;
 		int descuento = 0;
 		String autor = "Anónimo";
 		String url = "img/default.png";
@@ -182,21 +183,17 @@ public class AppLibreria {
 			try {
 				System.out.println("Introduce el precio del libro: ");
 				precio = sc.nextLine();
-				if ( Integer.parseInt(precio) <= 0) {
-					System.out.println("El precio del libro debe ser mayor que 0 y tener como mucho 2 decimales");
-					repetir = true;
+				if ((precio.matches("\\d+.\\d\\d")) || (precio.matches("\\d+.\\d")) || (precio.matches("\\d+"))){
+					liburu.setPrecio(new BigDecimal(precio));
+					repetir = false;
 				}else {
-					if ((precio.matches("\\d+.\\d\\d")) || (precio.matches("\\d+"))){
-						liburu.setPrecio(new BigDecimal(precio));
-						repetir = false;
-					}else {
-						System.out.println("El precio debe tener el formato correcto y a lo sumo 2 decimales");
-						repetir = true;
-					}
-						
+					System.out.println("El precio debe ser numérico y tener como mucho 2 decimales");
+					repetir = true;
 				}
+
+				
 			}catch (Exception E){
-				System.out.println("El precio del libro debe ser un número mayor que 0 y tener como mucho 2 decimales");
+				System.out.println("El precio no tiene el formato adecuado. Puede que haya metido comas en vez de puntos");
 				repetir = true;
 			}
 		}while(repetir);
