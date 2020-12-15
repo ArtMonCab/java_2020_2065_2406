@@ -7,21 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.libreriaMF0227.accesodatos.Dao;
-import com.libreriaMF0227.accesodatos.LibroDao;
-import com.libreriaMF0227.modelos.Libro;
-
-
-@WebServlet(name = "inicio", urlPatterns = { "/inicio" })
-public class InicioServlet extends HttpServlet {
+/**
+ * Servlet implementation class LogoutServlet
+ */
+@WebServlet(name = "logout", urlPatterns = { "/logout" })
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Dao dao = LibroDao.getInstance();
-		Iterable<Libro> libros = dao.getAll();
-		request.setAttribute("libros", libros);
-		request.getRequestDispatcher("/WEB-INF/vistas/inicio.jsp").forward(request, response);
+		request.getSession().invalidate();
+		response.sendRedirect(request.getContextPath() + "/");
 	}
 
 

@@ -13,9 +13,7 @@ public class AppLibreria {
 	static final protected String OP_LISTAR = "1";
 	static final protected String OP_CREAR = "2";
 	static final protected String OP_ELIMINAR = "3";
-	static final protected String OP_MODIFICAR = "4";
-	static final protected String OP_MOSTRAR = "5";
-	static final protected String OP_SALIR = "s";
+	static final protected String OP_SALIR = "S";
 	static final protected String NOMBRE_POJO = "libro";
 	
 	
@@ -66,9 +64,6 @@ public class AppLibreria {
 				break;	
 			case OP_ELIMINAR:
 				eliminar();
-				break;
-			case OP_MOSTRAR:
-				mostrar();
 				break;
 			case OP_SALIR:
 				salir = true;

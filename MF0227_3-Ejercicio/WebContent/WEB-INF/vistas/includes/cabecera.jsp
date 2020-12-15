@@ -22,12 +22,12 @@
 <!-- Hoja de estilos personalizada -->
 <link rel="stylesheet" href="css/supermercado.css">
 
-<title>Supermercado</title>
+<title>Libreria MF0227</title>
 </head>
 <body>
 	<header class="sticky-top">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand" href="#">Supermercado</a>
+			<a class="navbar-brand" href="#">Libreria MF0227</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -46,8 +46,7 @@
 					</c:if>
 				</ul>
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="carrito">Ver
-							carrito</a> <c:choose>
+					<li class="nav-item"> <c:choose>
 							<c:when test="${sessionScope.usuario == null}">
 								<li class="nav-item"><a class="nav-link" href="login">Iniciar
 										sesión</a></li>

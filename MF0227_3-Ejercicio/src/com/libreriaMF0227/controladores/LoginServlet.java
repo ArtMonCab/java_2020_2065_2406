@@ -7,35 +7,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class LoginServlet
- */
+
+import com.libreriaMF0227.accesodatos.UsuarioDao;
+import com.libreriaMF0227.modelos.Usuario;
+
+
 @WebServlet(name = "login", urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/WEB-INF/vistas/login.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String nombre = request.getParameter("nombre");
+		String password = request.getParameter("password");
+		
+		UsuarioDao dao = UsuarioDao.getInstancia();
+		Usuario usuario = dao.obtenerPorNombre(nombre);
+		
+		if(usuario != null && usuario.getPassword().equals(password)) {
+			request.getSession().setAttribute("usuario", usuario);
+			response.sendRedirect(request.getContextPath() + "/admin/index");
+		} else {
+			request.setAttribute("alertaTexto", "El usuario o la contraseña son incorrectos");
+			request.setAttribute("alertaNivel", "danger");
+			
+			request.getRequestDispatcher("/WEB-INF/vistas/login.jsp").forward(request, response);
+		}
 	}
 
 }

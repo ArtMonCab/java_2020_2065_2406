@@ -1,4 +1,4 @@
-package com.libreriaMF0227.controladores;
+package com.libreriaMF0227.controladores.admin;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -12,16 +12,24 @@ import com.libreriaMF0227.accesodatos.LibroDao;
 import com.libreriaMF0227.modelos.Libro;
 
 
-@WebServlet(name = "inicio", urlPatterns = { "/inicio" })
-public class InicioServlet extends HttpServlet {
+
+
+@WebServlet(name = "/admin/borrar", urlPatterns = { "//admin/borrar" })
+public class LibroBorrarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Dao dao = LibroDao.getInstance();
-		Iterable<Libro> libros = dao.getAll();
-		request.setAttribute("libros", libros);
-		request.getRequestDispatcher("/WEB-INF/vistas/inicio.jsp").forward(request, response);
+		String id = request.getParameter("id");
+		
+		Dao<Libro> dao = LibroDao.getInstance();
+		
+		dao.delete(Integer.parseInt(id));
+		
+		request.setAttribute("alertaTexto", "Borrado efectuado correctamente");
+		request.setAttribute("alertaNivel", "success");
+		
+		request.getRequestDispatcher("/admin/index").forward(request, response);
 	}
 
 

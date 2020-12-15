@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.libreriaMF0227.modelos.Libro;
 
-public class LibroDao implements Dao{
+public class LibroDao implements Dao<Libro>{
 	
 	private HashMap<Integer, Libro> hmLibros = new HashMap<Integer, Libro>();
 	
@@ -18,11 +18,11 @@ public class LibroDao implements Dao{
 	
 	
 	public LibroDao() {
-		hmLibros.put(1, new Libro(1,"Los futbolisimos. El misterio del jugador número 13", new BigDecimal("11.95"),5,"Roberto Santiago","images/futbolisimos1.png"));
-		hmLibros.put(2,new Libro(2,"Los futbolisimos. El misterio del obelisco mágico", new BigDecimal("11.95"),5,"Roberto Santiago","images/futbolisimos2.png"));
-		hmLibros.put(3,new Libro(3,"Los futbolisimos. El misterio del día de los inocentes", new BigDecimal("11.95"),5,"Roberto Santiago","images/futbolisimos3.png"));
-
-		indice = 4;
+		hmLibros.put(1,new Libro(1,"Los futbolisimos. El misterio del jugador número 13", new BigDecimal("11.95"),5,"ROBERTO SANTIAGO","img/futbolisimos1.png"));
+		hmLibros.put(2,new Libro(2,"Los futbolisimos. El misterio del obelisco mágico", new BigDecimal("11.95"),5,"ROBERTO SANTIAGO","img/futbolisimos2.png"));
+		hmLibros.put(3,new Libro(3,"Los futbolisimos. El misterio del día de los inocentes", new BigDecimal("11.95"),5,"ROBERTO SANTIAGO","img/futbolisimos3.png"));
+		hmLibros.put(4,new Libro(4,"Los futbolisimos. El misterio del ojo de halcón", new BigDecimal("11.95"),5,"ROBERTO SANTIAGO","img/futbolisimos4.png"));
+		indice = 5;
 	
 	}
 	
@@ -36,7 +36,7 @@ public class LibroDao implements Dao{
 	}
 
 	@Override
-	public List<Libro> getAll() {
+	public Iterable<Libro> getAll() {
 		return new ArrayList<>(hmLibros.values());
 	}
 

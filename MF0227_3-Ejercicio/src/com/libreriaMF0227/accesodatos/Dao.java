@@ -4,14 +4,17 @@ import java.util.List;
 
 import com.libreriaMF0227.modelos.Libro;
 
-public interface Dao {
+public interface Dao<T> {
 
-	List<Libro> getAll();
-		
-	Libro getById(int id);
-	
+
+	Iterable<T> getAll();
+
+	T getById(int id);
+
 	boolean delete(int id);
-	
-	boolean insert(Libro l);
+
+	boolean insert(T objeto);
 	
 }
+
+
