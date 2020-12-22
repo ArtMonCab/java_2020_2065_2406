@@ -117,6 +117,10 @@ public class Cliente {
 	}
 	
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+		
+		if (fechaNacimiento.isAfter(LocalDate.now().minusYears(18))){
+			setErrorFechaNacimiento("Debe ser mayor de edad");
+		}
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
