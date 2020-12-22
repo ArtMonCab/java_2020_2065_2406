@@ -26,7 +26,7 @@ public class AgregarTodoCarritoServlet extends HttpServlet {
 //		response.setContentType("text/plain");
 //		PrintWriter out = response.getWriter();
 
-		Dao<Producto> dao = ProductoDaoTreeMap.getInstancia();
+		Dao<Producto> dao = Configuracion.daoProductos;
 
 		LinkedHashMap<Long, Producto> carrito = new LinkedHashMap<>();
 
