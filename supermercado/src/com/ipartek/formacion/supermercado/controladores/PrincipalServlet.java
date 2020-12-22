@@ -18,7 +18,7 @@ public class PrincipalServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Dao<Producto> dao = ProductoDaoTreeMap.getInstancia();
+		Dao<Producto> dao = Configuracion.daoProductos;
 		Iterable<Producto> productos = dao.obtenerTodos();
 		request.setAttribute("productos", productos);
 		request.getRequestDispatcher("/WEB-INF/vistas/principal.jsp").forward(request, response);
