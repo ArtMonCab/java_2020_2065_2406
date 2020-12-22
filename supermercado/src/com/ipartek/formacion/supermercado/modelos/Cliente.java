@@ -8,24 +8,64 @@ public class Cliente {
 	private String nombre, apellidos, cif;
 	private LocalDate fechaNacimiento;
 	
+	private boolean correcto = true;
+	
+	private String errorId, errorNombre, errorApellidos, errorCif, errorFechaNacimiento;
+	
+	public Cliente(String id, String nombre, String apellidos, String cif, String fechaNacimiento) {
+		setId(id);
+		setNombre(nombre);
+		setApellidos(apellidos);
+		setCif(cif);
+		setFechaNacimiento(fechaNacimiento);
+		
+
+	}
+	
 	public Cliente(Long id, String nombre, String apellidos, String cif, LocalDate fechaNacimiento) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.cif = cif;
-		this.fechaNacimiento = fechaNacimiento;
+		setId(id);
+		setNombre(nombre);
+		setApellidos(apellidos);
+		setCif(cif);
+		setFechaNacimiento(fechaNacimiento);
+		
+
 	}
 
 	public Long getId() {
-		return id;
+		return id;	
 	}
 
+	public void setId(String id) {
+		/*try {
+			if (id != null) {
+				setId(Long.parseLong(id));
+			}else {
+				setId((Long)null);
+			}	
+		}catch(NumberFormatException e) {
+			setErrorId("El id debe ser numérico");
+		}*/
+
+		try {
+			setId(id != null && id.trim().length() != 0? Long.parseLong(id) : null);	
+		}catch(NumberFormatException e) {
+			setErrorId("El id debe ser numérico");
+		}
+			
+	}
+	
 	public void setId(Long id) {
+		if(id != null && id < 1) {
+			setErrorId("El id debe ser mayor que 0");
+		}
 		this.id = id;
 	}
 
 	public String getNombre() {
+		if (nombre == null || !nombre.matches("\\p{Lu}\\p{L1}{2}[ \\p{L}]*")) { //nombre.trim().length() < 2) {
+			setErrorNombre("El nombre es obligatorio, debe tener 2 caracteres y empezar con mayusculas");
+		}
 		return nombre;
 	}
 
@@ -38,6 +78,12 @@ public class Cliente {
 	}
 
 	public void setApellidos(String apellidos) {
+		if (apellidos == null && apellidos.trim().length() == 0) {
+			this.apellidos = null;
+		}else if (this.apellidos == null  && !this.apellidos.matches("\\p{Lu}\\p{L1}{2}[ \\p{L}]*")) {
+			setErrorApellidos("Los apellidos no deben ser obligatorios pero deben tener al menso 2 letras");
+		}
+		
 		this.apellidos = apellidos;
 	}
 
@@ -46,6 +92,9 @@ public class Cliente {
 	}
 
 	public void setCif(String cif) {
+		if (cif == null || !cif.matches("[ABCDEFGHJPQRSUVNW]\\D{8}|[KLMXYZ +\\D{7}[A-Z]|D{8}[A-Z]")) {
+			setErrorCif("El CIF debe tener formato correcto como por ejemplo: B12345678 X1234567A 12345678Z");
+		}
 		this.cif = cif;
 	}
 
@@ -53,8 +102,71 @@ public class Cliente {
 		return fechaNacimiento;
 	}
 
+	
+	public void setFechaNacimiento(String fechaNacimiento) {
+		/*
+		 Si fuera obligatorio:
+		 if (fechanacimiento == null || fechanacimiento.trim().length() == 0) {setErrorFecha
+		 */
+		try {
+			setFechaNacimiento(fechaNacimiento != null && fechaNacimiento.trim().length() > 0 ? LocalDate.parse(fechaNacimiento) : null);
+		}catch (Exception e){
+			setErrorFechaNacimiento("EL formato de la fecha de nacimiento no es correcto. Debe ser AAAA-MM-DD");
+		}
+		
+	}
+	
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	
+	public boolean isCorrecto() {
+		return correcto;
+	}
+
+	public void setCorrecto(boolean correcto) {
+		this.correcto = correcto;
+	}
+
+	public String getErrorId() {
+		return errorId;
+	}
+
+	public void setErrorId(String errorId) {
+		this.errorId = errorId;
+	}
+
+	public String getErrorNombre() {
+		return errorNombre;
+	}
+
+	public void setErrorNombre(String errorNombre) {
+		this.errorNombre = errorNombre;
+	}
+
+	public String getErrorSpellidos() {
+		return errorApellidos;
+	}
+
+	public void setErrorApellidos(String errorSpellidos) {
+		this.errorApellidos = errorSpellidos;
+	}
+
+	public String getErrorCif() {
+		return errorCif;
+	}
+
+	public void setErrorCif(String errorCif) {
+		this.errorCif = errorCif;
+	}
+
+	public String getErrorFechaNacimiento() {
+		return errorFechaNacimiento;
+	}
+
+	public void setErrorFechaNacimiento(String errorFechaNAcimiento) {
+		this.errorFechaNacimiento = errorFechaNAcimiento;
 	}
 
 	@Override
