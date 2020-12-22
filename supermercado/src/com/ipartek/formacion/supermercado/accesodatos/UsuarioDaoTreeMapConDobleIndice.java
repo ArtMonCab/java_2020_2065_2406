@@ -4,7 +4,7 @@ import java.util.TreeMap;
 
 import com.ipartek.formacion.supermercado.modelos.Usuario;
 
-public class UsuarioDaoTreeMapConDobleIndice implements Dao<Usuario> {
+public class UsuarioDaoTreeMapConDobleIndice implements DaoUsuario {
 	private static TreeMap<Long, Usuario> usuarios = new TreeMap<>();
 	private static TreeMap<String, Usuario> usuariosPorEmail = new TreeMap<>();
 
@@ -69,7 +69,7 @@ public class UsuarioDaoTreeMapConDobleIndice implements Dao<Usuario> {
 		usuarios.remove(id);
 	}
 	
-	// Método específico de este DAO
+	// Mï¿½todo especï¿½fico de este DAO
 	
 	public Usuario obtenerPorEmail(String email) {
 		return usuariosPorEmail.get(email);

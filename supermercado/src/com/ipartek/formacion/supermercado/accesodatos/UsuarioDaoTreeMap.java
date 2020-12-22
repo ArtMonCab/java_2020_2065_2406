@@ -4,7 +4,7 @@ import java.util.TreeMap;
 
 import com.ipartek.formacion.supermercado.modelos.Usuario;
 
-public class UsuarioDaoTreeMap implements Dao<Usuario> {
+public class UsuarioDaoTreeMap implements DaoUsuario {
 	private static TreeMap<Long, Usuario> usuarios = new TreeMap<>();
 
 	static {
@@ -17,14 +17,14 @@ public class UsuarioDaoTreeMap implements Dao<Usuario> {
 	// Ponemos privado el constructor por defecto para que nadie pueda crear
 	// instancias de esta clase de forma libre
 	// Con esto evitamos la posibilidad de que nadie haga new de esta clase (salvo
-	// esta clase en sí misma)
+	// esta clase en sï¿½ misma)
 	private UsuarioDaoTreeMap() {
 	}
 
-	// Creamos el único objeto que va a existir de este tipo
+	// Creamos el ï¿½nico objeto que va a existir de este tipo
 	private static UsuarioDaoTreeMap INSTANCIA = new UsuarioDaoTreeMap();
 
-	// Creamos un método público que de acceso a la única instancia disponible
+	// Creamos un mï¿½todo pï¿½blico que de acceso a la ï¿½nica instancia disponible
 	// Desde otras clases deberemos hacer
 	// ProductoDaoTreeMap dao = ProductoDaoTreeMap.getInstancia();
 	// o mejor
@@ -61,7 +61,7 @@ public class UsuarioDaoTreeMap implements Dao<Usuario> {
 		usuarios.remove(id);
 	}
 	
-	// Método específico de este DAO
+	// Mï¿½todo especï¿½fico de este DAO
 	
 	public Usuario obtenerPorEmail(String email) {
 		for(Usuario usuario: usuarios.values()) {
