@@ -9,6 +9,8 @@
 		<div class="col-sm-10">
 			<input class="form-control" type="number" min="1" name="id"
 				placeholder="Id" value="${cliente.id}" />
+			<div class="valid-feedback">Id correcto</div>
+			<div class="invalid-feedback">El id debe ser igual o superior a 1</div>	
 		</div>
 	</div>
 
@@ -18,6 +20,8 @@
 			<input class="form-control" type="text" name="nombre" id="nombre"
 				placeholder="Nombre" value="${cliente.nombre}" required
 				pattern="\p{Lu}\p{Ll}{2}[ \p{L}]*" />
+			<div class="valid-feedback">Nombre correcto</div>
+			<div class="invalid-feedback">El nombre es obligatorio y debe tener al menos 3 caracteres y empezar por mayuscula</div>	
 		</div>
 	</div>
 	<div class="form-group row">
@@ -26,6 +30,8 @@
 			<input type="text" class="form-control" id="apellidos"
 				name="apellidos" placeholder="Apellidos"
 				value="${cliente.apellidos}" pattern="\p{Lu}\p{Ll}{2}[ \p{L}]*" />
+			<div class="valid-feedback">Apellidos correctos</div>
+			<div class="invalid-feedback">Los apellidos deben empezar por mayuscula y tener al menso 3 caracteres</div>	
 		</div>
 	</div>
 	<div class="form-group row">
@@ -34,6 +40,8 @@
 			<input class="form-control" id="cif" type="text" name="cif"
 				placeholder="CIF" value="${cliente.cif}" required
 				pattern="[ABCDEFGHJPQRSUVNW]\d{8}|[XYZ]\d{7}[A-Z]|\d{8}[A-Z]" />
+			<div class="valid-feedback">CIF correcto</div>
+			<div class="invalid-feedback">El CIF debe tener uno de los siguientes formatos: B12345678 X1234567A 12345678Z</div>	
 		</div>
 	</div>
 	<div class="form-group row">
@@ -44,6 +52,8 @@
 				max="<%=java.time.LocalDate.now().minusYears(18)%>"
 				name="fecha-nacimiento" placeholder="Fecha de nacimiento"
 				value="${cliente.fechaNacimiento}" />
+			<div class="valid-feedback"></div>
+			<div class="invalid-feedback"></div>	
 		</div>
 	</div>
 
