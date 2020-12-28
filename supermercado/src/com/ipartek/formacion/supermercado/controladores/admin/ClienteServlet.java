@@ -38,7 +38,7 @@ public class ClienteServlet extends HttpServlet {
 			LOGGER.info("Cliente correcto");
 			response.sendRedirect(request.getContextPath() + "/admin/index");
 		} else {
-			LOGGER.warning("Cliente INcorrecto");
+			LOGGER.warning("Cliente Incorrecto");
 			request.setAttribute("cliente", cliente);
 			request.getRequestDispatcher("/WEB-INF/vistas/admin/cliente.jsp").forward(request, response);
 		}
