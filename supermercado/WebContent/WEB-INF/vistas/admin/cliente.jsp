@@ -6,8 +6,8 @@
 	novalidate>
 
 	<div class="form-group row">
-		<label for="id" class="col-sm-2 col-form-label">Id (opcional)</label>
-		<div class="col-sm-10">
+		<label for="id" class="col-md-5 col-lg-4 col-xl-3 col-form-label">Id (opcional)</label>
+		<div class="col">
 			<input class="form-control ${cliente != null ? (cliente.errorId != null ? 'is-invalid' : 'is-valid') : ''}" type="number" min="1" name="id"
 				placeholder="Id" value="${cliente.id}" />
 			<div class="valid-feedback">Id correcto</div>
@@ -16,8 +16,8 @@
 	</div>
 
 	<div class="form-group row">
-		<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
-		<div class="col-sm-10">
+		<label for="nombre" class="col-md-5 col-lg-4 col-xl-3 col-form-label">Nombre</label>
+		<div class="col">
 			<input class="form-control ${cliente != null ? (cliente.errorNombre != null ? 'is-invalid' : 'is-valid') : ''}" type="text" name="nombre" id="nombre"
 				placeholder="Nombre" value="${cliente.nombre}" required
 				pattern="\p{Lu}\p{Ll}{2}[ \p{L}]*" />
@@ -26,8 +26,8 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="apellidos" class="col-sm-2 col-form-label">Apellidos (opcionales)</label>
-		<div class="col-sm-10">
+		<label for="apellidos" class="col-md-5 col-lg-4 col-xl-3 col-form-label">Apellidos (opcionales)</label>
+		<div class="col">
 			<input type="text" class="form-control ${cliente != null ? (cliente.errorApellidos != null ? 'is-invalid' : 'is-valid') : ''}" id="apellidos"
 				name="apellidos" placeholder="Apellidos"
 				value="${cliente.apellidos}" pattern="\p{Lu}\p{Ll}{2}[ \p{L}]*" />
@@ -36,8 +36,8 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="cif" class="col-sm-2 col-form-label">CIF</label>
-		<div class="col-sm-10">
+		<label for="cif" class="col-md-5 col-lg-4 col-xl-3 col-form-label">CIF</label>
+		<div class="col">
 			<input class="form-control ${cliente != null ? (cliente.errorCif != null ? 'is-invalid' : 'is-valid') : ''}" id="cif" type="text" name="cif"
 				placeholder="CIF" value="${cliente.cif}" required
 				pattern="[ABCDEFGHJPQRSUVNW]\d{8}|[XYZ]\d{7}[A-Z]|\d{8}[A-Z]" />
@@ -46,9 +46,9 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="fecha-nacimiento" class="col-sm-2 col-form-label">Fecha
+		<label for="fecha-nacimiento" class="col-md-5 col-lg-4 col-xl-3 col-form-label">Fecha
 			de nacimiento (opcional)</label>
-		<div class="col-sm-10">
+		<div class="col">
 			<input class="form-control ${cliente != null ? (cliente.errorFechaNacimiento != null ? 'is-invalid' : 'is-valid') : ''}" id="fecha-nacimiento" type="date"
 				max="<%=java.time.LocalDate.now().minusYears(18)%>"
 				name="fecha-nacimiento" placeholder="Fecha de nacimiento"
@@ -59,7 +59,7 @@
 	</div>
 
 	<div class="form-group row">
-		<div class="col-sm-10">
+		<div class="offset-md-5 offset-lg-4 offset-xl-3 col">
 			<button type="submit" class="btn btn-primary">Aceptar</button>
 		</div>
 	</div>
