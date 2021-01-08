@@ -4,7 +4,7 @@
 
 <h1>Edición de producto</h1>
 
-<form action="" method="post" class="needs-validation" novalidate>
+<form action="" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
 	<%--<input type="hidden" name="id" value="" />--%>
 
 	<div class="form-group row">
@@ -29,7 +29,7 @@
 		</div>
 	</div>
 
-	<%--
+	
 	<div class="form-group row">
 		<label for="imagen" class="col-md-4 col-lg-3 col-form-label">Imagen</label>
 		<div class="col">
@@ -42,8 +42,8 @@
 			<div class="invalid-feedback"></div>
 		</div>
 	</div>
-	--%>
 	
+	<%--
 	<div class="form-group row">
 		<label for="imagen" class="col-md-4 col-lg-3 col-form-label">Imagen</label>
 		<div class="col">
@@ -53,6 +53,7 @@
 			<div class="invalid-feedback"></div>
 		</div>
 	</div>
+	--%>
 	
 	<div class="form-group row">
 		<label for="descripcion" class="col-md-4 col-lg-3 col-form-label">Descripción</label>
