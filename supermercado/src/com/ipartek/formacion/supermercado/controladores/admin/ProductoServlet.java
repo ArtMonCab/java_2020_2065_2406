@@ -2,6 +2,8 @@ package com.ipartek.formacion.supermercado.controladores.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,8 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import com.ipartek.formacion.supermercado.accesodatos.Dao;
+import com.ipartek.formacion.supermercado.accesodatos.DepartamentoDaoMySql;
 import com.ipartek.formacion.supermercado.accesodatos.ProductoDaoTreeMap;
 import com.ipartek.formacion.supermercado.modelos.Producto;
+import com.ipartek.formacion.supermercado.modelos.Departamento;
 
 
 @WebServlet(name = "/admin/producto", urlPatterns = { "/admin/producto" })
@@ -47,6 +51,10 @@ public class ProductoServlet extends HttpServlet {
 			request.setAttribute("producto", producto);
 		}
 
+		Iterable<Departamento> departamentos = DepartamentoDaoMySql.getInstancia().obtenerTodos();
+		
+		request.setAttribute("departamentos", departamentos);
+		
 		// 5. Redirigir a otra vista
 		request.getRequestDispatcher("/WEB-INF/vistas/admin/producto.jsp").forward(request, response);
 	}
