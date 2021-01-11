@@ -16,6 +16,17 @@
 			<div class="invalid-feedback">${producto.errorId}</div>
 		</div>
 	</div>
+	
+	<div class="form-group row">
+		<label for="departamento" class="col-md-4 col-lg-3 col-form-label">Id</label>
+		<div class="col">
+			<select class="form-control" id="departamento" name="departamento">
+				<option value="1">Lácteos</option>
+				<option value="2">Frescos</option>
+				<option value="3">Congelados</option>
+			</select>
+		</div>
+	</div>
 
 	<div class="form-group row">
 		<label for="nombre" class="col-md-4 col-lg-3  col-form-label">Nombre</label>

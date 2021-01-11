@@ -16,6 +16,7 @@ public class Producto implements Serializable {
 	private String unidadMedida;
 	private BigDecimal precioUnidadMedida;
 	private Integer cantidad;
+	private Departamento departamento;
 
 	private boolean correcto = true;
 
@@ -190,6 +191,14 @@ public class Producto implements Serializable {
 			setCantidad("La cantidad debe ser mayor o igual a cero. Es obligatoria");
 		}
 		this.cantidad = cantidad;
+	}
+
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
 	}
 
 	public BigDecimal getPrecioConDescuento() {

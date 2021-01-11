@@ -3,12 +3,18 @@ package com.ipartek.formacion.supermercado.modelos;
 public class Usuario {
 	private Long id;
 	private String email, password;
+	private String errorId,errorEmail,errorPassword;
 	
 	public Usuario(Long id, String email, String password) {
-		super();
-		this.id = id;
-		this.email = email;
-		this.password = password;
+		setId(id);
+		setEmail(email);
+		setPassword(password);
+	}
+	
+	public Usuario(String id, String email, String password) {
+		setId(id);
+		setEmail(email);
+		setPassword(password);
 	}
 
 	public Long getId() {
@@ -16,7 +22,21 @@ public class Usuario {
 	}
 
 	public void setId(Long id) {
+		if(id != null && id < 1L) {
+			setErrorId("El id debe ser mayor que 0");
+		} else {
+			setErrorId(null);
+		}
+		
 		this.id = id;
+	}
+	
+	public void setId(String id) {
+		try {
+			setId(id != null && id.trim().length() > 0 ? Long.parseLong(id) : null);
+		} catch (NumberFormatException e) {
+			setErrorId("El id debe ser numérico");
+		}	
 	}
 
 	public String getEmail() {
@@ -24,6 +44,11 @@ public class Usuario {
 	}
 
 	public void setEmail(String email) {
+		if(email == null || !email.matches("^[\\\\w!#$%&'*+/=?`{|}~^-]+(?:\\\\.[\\\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\\\.)+[a-zA-Z]{2,6}$")) {
+			setErrorEmail("El email es obligatorio y debe tener un formato estilo usuario@dominio.xxx");
+		} else {
+			setErrorEmail(null);
+		}
 		this.email = email;
 	}
 
@@ -33,6 +58,32 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	
+
+	public String getErrorId() {
+		return errorId;
+	}
+
+	public void setErrorId(String errorId) {
+		this.errorId = errorId;
+	}
+
+	public String getErrorEmail() {
+		return errorEmail;
+	}
+
+	public void setErrorEmail(String errorEmail) {
+		this.errorEmail = errorEmail;
+	}
+
+	public String getErrorPassword() {
+		return errorPassword;
+	}
+
+	public void setErrorPassword(String errorPassword) {
+		this.errorPassword = errorPassword;
 	}
 
 	@Override
@@ -74,6 +125,9 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", email=" + email + ", password=" + password + "]";
+		return "Usuario [id=" + id + ", email=" + email + ", password=" + password + ", errorId=" + errorId
+				+ ", errorEmail=" + errorEmail + ", errorPassword=" + errorPassword + "]";
 	}
+
+
 }
