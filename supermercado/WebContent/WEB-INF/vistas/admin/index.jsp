@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/vistas/includes/cabecera.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/vistas/includes/cabecera.jsp"%>
 
 <div class="table-responsive">
 	<table class="table table-striped table-bordered table-hover table-sm">
@@ -9,6 +9,7 @@
 			<tr>
 				<th scope="col">Id</th>
 				<th scope="col">Nombre</th>
+				<th scope="col">Departamento</th>
 				<th scope="col">Imagen</th>
 				<th scope="col">Descripción</th>
 				<th scope="col">Precio</th>
@@ -24,6 +25,7 @@
 				<tr>
 					<th scope="row">${producto.id}</th>
 					<td>${producto.nombre}</td>
+					<td>${producto.departamento.nombre}</td>
 					<td><img src="productimgs/${producto.urlImagen}" alt="" style="height: 3em" /></td>
 					<td>${producto.descripcion}</td>
 					<td><fmt:formatNumber type="currency" value="${producto.precio}" /></td>
@@ -46,5 +48,4 @@
 		<a class="btn btn-primary" href="admin/producto">Añadir producto</a> 
 	</p>
 </div>
-
-<%@ include file="/WEB-INF/vistas/includes/pie.jsp" %>
+<%@ include file="/WEB-INF/vistas/includes/pie.jsp"%>
