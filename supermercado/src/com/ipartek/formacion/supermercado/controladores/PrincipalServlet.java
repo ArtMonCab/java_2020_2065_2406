@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.supermercado.accesodatos.Dao;
-import com.ipartek.formacion.supermercado.accesodatos.ProductoDaoTreeMap;
 import com.ipartek.formacion.supermercado.modelos.Producto;
 
 @WebServlet("/principal")
