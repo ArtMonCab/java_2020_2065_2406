@@ -57,6 +57,8 @@
 		</div>
 	</div>
 	
+	<input type="hidden" name="imagenAnterior" value="${producto.urlImagen}" />
+	
 	<%--
 	<div class="form-group row">
 		<label for="imagen" class="col-md-4 col-lg-3 col-form-label">Imagen</label>
