@@ -16,6 +16,7 @@ public class Producto implements Serializable {
 	private String unidadMedida;
 	private BigDecimal precioUnidadMedida;
 	private Integer cantidad;
+	
 	private Departamento departamento;
 
 	private boolean correcto = true;
@@ -29,12 +30,26 @@ public class Producto implements Serializable {
 	private String errorUnidadMedida;
 	private String errorPrecioUnidadMedida;
 	private String errorCantidad;
+	private String errorDepartamento;
 
 	public Producto(String id, String nombre, String descripcion, String urlImagen, String precio, String descuento,
 			String unidadMedida, String precioUnidadMedida, String cantidad) {
 
 //		this(id.trim().length() != 0 ? Long.parseLong(id) : null, nombre, descripcion, urlImagen, new BigDecimal(precio), Integer.parseInt(descuento),
 //				unidadMedida, new BigDecimal(precioUnidadMedida), Integer.parseInt(cantidad));
+		setId(id);
+		setNombre(nombre);
+		setDescripcion(descripcion);
+		setUrlImagen(urlImagen);
+		setPrecio(precio);
+		setDescuento(descuento);
+		setUnidadMedida(unidadMedida);
+		setPrecioUnidadMedida(precioUnidadMedida);
+		setCantidad(cantidad);
+	}
+	
+	public Producto(Long id, String nombre, String descripcion, String urlImagen, BigDecimal precio, Integer descuento,
+			String unidadMedida, BigDecimal precioUnidadMedida, Integer cantidad) {
 		setId(id);
 		setNombre(nombre);
 		setDescripcion(descripcion);
@@ -84,19 +99,6 @@ public class Producto implements Serializable {
 		} catch (NumberFormatException e) {
 			setErrorId("El id debe ser numérico");
 		}
-	}
-
-	public Producto(Long id, String nombre, String descripcion, String urlImagen, BigDecimal precio, Integer descuento,
-			String unidadMedida, BigDecimal precioUnidadMedida, Integer cantidad) {
-		setId(id);
-		setNombre(nombre);
-		setDescripcion(descripcion);
-		setUrlImagen(urlImagen);
-		setPrecio(precio);
-		setDescuento(descuento);
-		setUnidadMedida(unidadMedida);
-		setPrecioUnidadMedida(precioUnidadMedida);
-		setCantidad(cantidad);
 	}
 
 	public Long getId() {
@@ -193,14 +195,6 @@ public class Producto implements Serializable {
 		this.cantidad = cantidad;
 	}
 
-	public Departamento getDepartamento() {
-		return departamento;
-	}
-
-	public void setDepartamento(Departamento departamento) {
-		this.departamento = departamento;
-	}
-
 	public BigDecimal getPrecioConDescuento() {
 		if (descuento == null || descuento == 0) {
 			return precio;
@@ -212,6 +206,17 @@ public class Producto implements Serializable {
 
 		// return precio - (precio * (descuento / 100));
 		return precio.subtract(precio.multiply(new BigDecimal(descuento).divide(new BigDecimal(100))));
+	}
+
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		if(departamento == null || departamento.getId() == null || departamento.getId() == 0L) {
+			setErrorDepartamento("El departamento es obligatorio");
+		}
+		this.departamento = departamento;
 	}
 
 	public boolean isCorrecto() {
@@ -303,6 +308,15 @@ public class Producto implements Serializable {
 		this.errorCantidad = errorCantidad;
 	}
 
+	public String getErrorDepartamento() {
+		return errorDepartamento;
+	}
+
+	public void setErrorDepartamento(String errorDepartamento) {
+		correcto = false;
+		this.errorDepartamento = errorDepartamento;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -380,10 +394,11 @@ public class Producto implements Serializable {
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", urlImagen=" + urlImagen
 				+ ", precio=" + precio + ", descuento=" + descuento + ", unidadMedida=" + unidadMedida
-				+ ", precioUnidadMedida=" + precioUnidadMedida + ", cantidad=" + cantidad + ", correcto=" + correcto
-				+ ", errorId=" + errorId + ", errorNombre=" + errorNombre + ", errorDescripcion=" + errorDescripcion
-				+ ", errorUrlImagen=" + errorUrlImagen + ", errorPrecio=" + errorPrecio + ", errorDescuento="
-				+ errorDescuento + ", errorUnidadMedida=" + errorUnidadMedida + ", errorPrecioUnidadMedida="
-				+ errorPrecioUnidadMedida + ", errorCantidad=" + errorCantidad + "]";
+				+ ", precioUnidadMedida=" + precioUnidadMedida + ", cantidad=" + cantidad + ", departamento="
+				+ departamento + ", correcto=" + correcto + ", errorId=" + errorId + ", errorNombre=" + errorNombre
+				+ ", errorDescripcion=" + errorDescripcion + ", errorUrlImagen=" + errorUrlImagen + ", errorPrecio="
+				+ errorPrecio + ", errorDescuento=" + errorDescuento + ", errorUnidadMedida=" + errorUnidadMedida
+				+ ", errorPrecioUnidadMedida=" + errorPrecioUnidadMedida + ", errorCantidad=" + errorCantidad
+				+ ", errorDepartamento=" + errorDepartamento + "]";
 	}
 }
