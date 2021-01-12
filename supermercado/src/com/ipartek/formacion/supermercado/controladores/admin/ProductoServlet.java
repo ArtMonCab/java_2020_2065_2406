@@ -2,8 +2,6 @@ package com.ipartek.formacion.supermercado.controladores.admin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,24 +14,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import com.ipartek.formacion.supermercado.accesodatos.Dao;
-import com.ipartek.formacion.supermercado.accesodatos.DepartamentoDaoMySql;
-import com.ipartek.formacion.supermercado.accesodatos.ProductoDaoTreeMap;
-import com.ipartek.formacion.supermercado.modelos.Producto;
+import com.ipartek.formacion.supermercado.controladores.Configuracion;
 import com.ipartek.formacion.supermercado.modelos.Departamento;
+import com.ipartek.formacion.supermercado.modelos.Producto;
 
-
-@WebServlet(name = "/admin/producto", urlPatterns = { "/admin/producto" })
+@WebServlet("/admin/producto")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
-maxFileSize = 1024 * 1024 * 5 * 5,
+maxFileSize = 1024 * 1024 * 5, 
 maxRequestSize = 1024 * 1024 * 5 * 5)
 public class ProductoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final Logger LOGGER = Logger.getLogger(ProductoServlet.class.getName());
-	
+
 	private static final String UPLOAD_DIRECTORY = "productimgs";
-       
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// 1. Recoger información de la petición
 
 		String id = request.getParameter("id");
@@ -42,7 +39,7 @@ public class ProductoServlet extends HttpServlet {
 		// 3. Tomar decisiones según lo recibido
 
 		if (id != null) {
-			Dao<Producto> dao = ProductoDaoTreeMap.getInstancia();
+			Dao<Producto> dao = Configuracion.daoProductos;
 
 			Producto producto = dao.obtenerPorId(Long.parseLong(id));
 
@@ -51,7 +48,7 @@ public class ProductoServlet extends HttpServlet {
 			request.setAttribute("producto", producto);
 		}
 
-		Iterable<Departamento> departamentos = DepartamentoDaoMySql.getInstancia().obtenerTodos();
+		Iterable<Departamento> departamentos = Configuracion.daoDepartamentos.obtenerTodos();
 		
 		request.setAttribute("departamentos", departamentos);
 		
@@ -59,10 +56,8 @@ public class ProductoServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/vistas/admin/producto.jsp").forward(request, response);
 	}
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// Cambiar codificación de entrada de datos de formulario de Windows-1252 a UTF8
 
 		request.setCharacterEncoding("utf-8");
@@ -75,6 +70,9 @@ public class ProductoServlet extends HttpServlet {
 
 		String id = request.getParameter("id");
 		String nombre = request.getParameter("nombre");
+		
+		String departamentoId = request.getParameter("departamento");
+		
 		String urlImagen = null; // = request.getParameter("imagen");
 		String descripcion = request.getParameter("descripcion");
 		String precio = request.getParameter("precio");
@@ -82,24 +80,28 @@ public class ProductoServlet extends HttpServlet {
 		String unidadMedida = request.getParameter("unidad-medida");
 		String precioUnidadMedida = request.getParameter("precio-unidad-medida");
 		String descuento = request.getParameter("descuento");
-		
+
 		String nombreFichero = null;
 		
 		for (Part part : request.getParts()) {
 		    nombreFichero = part.getSubmittedFileName();
-
-		    if(nombreFichero != null) {
-			    LOGGER.info(nombreFichero);
+		    
+		    LOGGER.info("Nombre de fichero: [" + nombreFichero + "]");
+		    
+		    if(nombreFichero != null && nombreFichero.trim().length() > 0) {
+			    LOGGER.info("Nombre de fichero ACEPTADO: [" + nombreFichero + "]");
 			    part.write(uploadPath + File.separator + nombreFichero);
-
+			    
 			    urlImagen = nombreFichero;
 		    }
 		}
-
+		
 		// 2. Poner información dentro de un modelo
 
 		Producto producto = new Producto(id, nombre, descripcion, urlImagen, precio, descuento, unidadMedida,
 				precioUnidadMedida, cantidad);
+		
+		producto.setDepartamento(new Departamento(Long.parseLong(departamentoId), null, null));
 
 		LOGGER.log(Level.INFO, producto.toString());
 
@@ -108,12 +110,16 @@ public class ProductoServlet extends HttpServlet {
 		if (!producto.isCorrecto()) {
 			// 4. Generar modelo para la vista
 			request.setAttribute("producto", producto);
+			
+			Iterable<Departamento> departamentos = Configuracion.daoDepartamentos.obtenerTodos();
+			
+			request.setAttribute("departamentos", departamentos);
 			// 5. Redirigir a otra vista
 			request.getRequestDispatcher("/WEB-INF/vistas/admin/producto.jsp").forward(request, response);
 			return;
 		}
 
-		Dao<Producto> dao = ProductoDaoTreeMap.getInstancia();
+		Dao<Producto> dao = Configuracion.daoProductos;
 
 		String mensaje;
 
