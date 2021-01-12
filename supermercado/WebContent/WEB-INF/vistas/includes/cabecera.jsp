@@ -23,12 +23,12 @@
 <!-- Hoja de estilos personalizada -->
 <link rel="stylesheet" href="css/supermercado.css">
 
-<title>Supermercado</title>
+<title>El Super</title>
 </head>
 <body>
 	<header class="sticky-top">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand" href="#">Supermercado</a>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-info">
+			<a class="navbar-brand" href="#">El Super</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"

@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 </main>
 <footer>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">&copy; 2020 Javier Lete</a>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-info">
+		<a class="navbar-brand" href="#">&copy; 2021 Arturo Montañez</a>
 		<div class="navbar-collapse">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link" href="#">Privacidad</a></li>
