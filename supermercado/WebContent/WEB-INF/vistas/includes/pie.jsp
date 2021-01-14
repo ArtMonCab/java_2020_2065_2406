@@ -8,8 +8,7 @@
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link" href="#">Privacidad</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Cookies</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Dónde
-						estamos</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Localización</a></li>
 			</ul>
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="#"><i

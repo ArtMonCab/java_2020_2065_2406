@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/vistas/includes/cabecera.jsp" %>
 
 <div class="jumbotron">
-	<p class="display-1">Ha habido un error en la página</p>
+	<p class="display-1">Error en la página</p>
 	<small><%= request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE) %></small>
 	<small><%= request.getAttribute(RequestDispatcher.ERROR_MESSAGE) %></small>
 </div>

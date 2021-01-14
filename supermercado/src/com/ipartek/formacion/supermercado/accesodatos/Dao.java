@@ -12,6 +12,8 @@ public interface Dao<T> {
 	default void crear(T objeto){
 		throw new AccesoDatosException("MÉTODO NO IMPLEMENTADO");
 	}
+	
+
 	default void modificar(T objeto){
 		throw new AccesoDatosException("MÉTODO NO IMPLEMENTADO");
 	}

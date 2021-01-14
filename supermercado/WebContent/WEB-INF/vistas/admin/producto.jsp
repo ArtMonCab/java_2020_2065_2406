@@ -26,6 +26,8 @@
 				<c:forEach items="${departamentos}" var="departamento">
 					<option value="${departamento.id}" ${departamento.id == producto.departamento.id ? 'selected' : ''}>${departamento.nombre}</option>
 				</c:forEach>
+				
+				<option VALUE="-1">AÑADIR DEPARTAMENTO</option>
 			</select>
 			<div class="valid-feedback">Departamento correcto</div>
 			<div class="invalid-feedback">${producto.errorDepartamento != null ? producto.errorDepartamento : 'Es obligatorio introducir el departamento'}</div>
