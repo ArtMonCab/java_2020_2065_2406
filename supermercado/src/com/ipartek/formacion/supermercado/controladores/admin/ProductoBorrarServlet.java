@@ -18,6 +18,7 @@ public class ProductoBorrarServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
+		String deshacer = request.getParameter(name)
 		
 		Dao<Producto> dao = Configuracion.daoProductos;
 		
