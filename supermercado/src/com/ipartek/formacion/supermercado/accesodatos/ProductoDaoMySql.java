@@ -17,14 +17,21 @@ import com.ipartek.formacion.supermercado.modelos.Producto;
 
 public class ProductoDaoMySql implements Dao<Producto> {
 
-	private static final String SQL_SELECT = "SELECT * FROM productos p JOIN departamentos d ON p.departamentos_id = d.id;";
+	private static final String SQL_SELECT = "{call productos_obtener_todos()}";
+	private static final String SQL_SELECT_ID = "{call productos_obtener_por_id(?)}";
+	
+	private static final String SQL_INSERT = "{call productos_insertar(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+	private static final String SQL_UPDATE = "{call productos_modificar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+	private static final String SQL_DELETE = "{call productos_borrar(?)}";
+
+	/*private static final String SQL_SELECT = "SELECT * FROM productos p JOIN departamentos d ON p.departamentos_id = d.id;";
 	private static final String SQL_SELECT_ID = "SELECT * FROM productos p JOIN departamentos d ON p.departamentos_id = d.id WHERE p.id = ?";
 	
 	private static final String SQL_INSERT = "INSERT INTO productos "
 			+ "(nombre, descripcion, url_imagen, precio, descuento, unidad_medida, precio_unidad_medida, cantidad, departamentos_id) VALUES "
 			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SQL_UPDATE = "UPDATE productos SET nombre = ?, descripcion = ?, url_imagen = ?, precio = ?, descuento = ?, unidad_medida = ?, precio_unidad_medida = ?, cantidad = ?, departamentos_id = ? WHERE id = ?";
-	private static final String SQL_DELETE = "DELETE FROM productos WHERE id = ?";
+	private static final String SQL_DELETE = "DELETE FROM productos WHERE id = ?";*/
 
 	private DataSource dataSource;
 	
@@ -85,7 +92,7 @@ public class ProductoDaoMySql implements Dao<Producto> {
 	@Override
 	public Producto obtenerPorId(Long id) {
 		try (Connection con = obtenerConexion();
-				PreparedStatement ps = con.prepareStatement(SQL_SELECT_ID);) {
+				PreparedStatement ps = con.prepareCall(SQL_SELECT_ID);) {
 
 			ps.setLong(1, id);
 
@@ -113,7 +120,7 @@ public class ProductoDaoMySql implements Dao<Producto> {
 	@Override
 	public void crear(Producto producto) {
 		try (Connection con = obtenerConexion();
-				PreparedStatement ps = con.prepareStatement(SQL_INSERT);) {
+				PreparedStatement ps = con.prepareCall(SQL_INSERT);) {
 
 			ps.setString(1, producto.getNombre());
 			ps.setString(2, producto.getDescripcion());
@@ -138,7 +145,7 @@ public class ProductoDaoMySql implements Dao<Producto> {
 	@Override
 	public void modificar(Producto producto) {
 		try (Connection con = obtenerConexion();
-				PreparedStatement ps = con.prepareStatement(SQL_UPDATE);) {
+				PreparedStatement ps = con.prepareCall(SQL_UPDATE);) {
 
 			ps.setString(1, producto.getNombre());
 			ps.setString(2, producto.getDescripcion());
@@ -164,7 +171,7 @@ public class ProductoDaoMySql implements Dao<Producto> {
 	@Override
 	public void eliminar(Long id) {
 		try (Connection con = obtenerConexion();
-				PreparedStatement ps = con.prepareStatement(SQL_DELETE);) {
+				PreparedStatement ps = con.prepareCall(SQL_DELETE);) {
 
 			ps.setLong(1, id);
 
