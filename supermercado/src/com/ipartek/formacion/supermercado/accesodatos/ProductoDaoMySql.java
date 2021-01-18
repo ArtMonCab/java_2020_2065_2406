@@ -1,10 +1,9 @@
 package com.ipartek.formacion.supermercado.accesodatos;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.naming.Context;
@@ -16,7 +15,6 @@ import com.ipartek.formacion.supermercado.modelos.Departamento;
 import com.ipartek.formacion.supermercado.modelos.Producto;
 
 public class ProductoDaoMySql implements Dao<Producto> {
-
 	private static final String SQL_SELECT = "{call productos_obtener_todos()}";
 	private static final String SQL_SELECT_BORRADOS = "{call productos_obtener_borrados()}";
 	private static final String SQL_SELECT_ID = "{call productos_obtener_por_id(?)}";
@@ -24,15 +22,7 @@ public class ProductoDaoMySql implements Dao<Producto> {
 	private static final String SQL_INSERT = "{call productos_insertar(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 	private static final String SQL_UPDATE = "{call productos_modificar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 	private static final String SQL_DELETE = "{call productos_borrar(?)}";
-
-	/*private static final String SQL_SELECT = "SELECT * FROM productos p JOIN departamentos d ON p.departamentos_id = d.id;";
-	private static final String SQL_SELECT_ID = "SELECT * FROM productos p JOIN departamentos d ON p.departamentos_id = d.id WHERE p.id = ?";
-	
-	private static final String SQL_INSERT = "INSERT INTO productos "
-			+ "(nombre, descripcion, url_imagen, precio, descuento, unidad_medida, precio_unidad_medida, cantidad, departamentos_id) VALUES "
-			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String SQL_UPDATE = "UPDATE productos SET nombre = ?, descripcion = ?, url_imagen = ?, precio = ?, descuento = ?, unidad_medida = ?, precio_unidad_medida = ?, cantidad = ?, departamentos_id = ? WHERE id = ?";
-	private static final String SQL_DELETE = "DELETE FROM productos WHERE id = ?";*/
+	private static final String SQL_UNDELETE = "{call productos_recuperar(?)}";
 
 	private DataSource dataSource;
 	
@@ -76,8 +66,8 @@ public class ProductoDaoMySql implements Dao<Producto> {
 
 	private Iterable<Producto> obtenerRegistros(String consulta) {
 		try (Connection con = obtenerConexion();
-				Statement s = con.createStatement();
-				ResultSet rs = s.executeQuery(consulta)) {
+				CallableStatement cs = con.prepareCall(consulta);
+				ResultSet rs = cs.executeQuery()) {
 
 			ArrayList<Producto> productos = new ArrayList<>();
 			Producto producto;
@@ -102,11 +92,11 @@ public class ProductoDaoMySql implements Dao<Producto> {
 	@Override
 	public Producto obtenerPorId(Long id) {
 		try (Connection con = obtenerConexion();
-				PreparedStatement ps = con.prepareCall(SQL_SELECT_ID);) {
+				CallableStatement cs = con.prepareCall(SQL_SELECT_ID);) {
 
-			ps.setLong(1, id);
+			cs.setLong(1, id);
 
-			try (ResultSet rs = ps.executeQuery()) {
+			try (ResultSet rs = cs.executeQuery()) {
 				Producto producto = null;
 				Departamento departamento;
 				
@@ -130,19 +120,19 @@ public class ProductoDaoMySql implements Dao<Producto> {
 	@Override
 	public void crear(Producto producto) {
 		try (Connection con = obtenerConexion();
-				PreparedStatement ps = con.prepareCall(SQL_INSERT);) {
+				CallableStatement cs = con.prepareCall(SQL_INSERT);) {
 
-			ps.setString(1, producto.getNombre());
-			ps.setString(2, producto.getDescripcion());
-			ps.setString(3, producto.getUrlImagen());
-			ps.setBigDecimal(4, producto.getPrecio());
-			ps.setInt(5, producto.getDescuento());
-			ps.setString(6, producto.getUnidadMedida());
-			ps.setBigDecimal(7, producto.getPrecioUnidadMedida());
-			ps.setInt(8, producto.getCantidad());
-			ps.setLong(9, producto.getDepartamento().getId());
+			cs.setString(1, producto.getNombre());
+			cs.setString(2, producto.getDescripcion());
+			cs.setString(3, producto.getUrlImagen());
+			cs.setBigDecimal(4, producto.getPrecio());
+			cs.setInt(5, producto.getDescuento());
+			cs.setString(6, producto.getUnidadMedida());
+			cs.setBigDecimal(7, producto.getPrecioUnidadMedida());
+			cs.setInt(8, producto.getCantidad());
+			cs.setLong(9, producto.getDepartamento().getId());
 
-			int numeroRegistrosInsertados = ps.executeUpdate();
+			int numeroRegistrosInsertados = cs.executeUpdate();
 
 			if (numeroRegistrosInsertados != 1) {
 				throw new AccesoDatosException("Se han insertado " + numeroRegistrosInsertados + " registros");
@@ -155,20 +145,20 @@ public class ProductoDaoMySql implements Dao<Producto> {
 	@Override
 	public void modificar(Producto producto) {
 		try (Connection con = obtenerConexion();
-				PreparedStatement ps = con.prepareCall(SQL_UPDATE);) {
+				CallableStatement cs = con.prepareCall(SQL_UPDATE);) {
 
-			ps.setString(1, producto.getNombre());
-			ps.setString(2, producto.getDescripcion());
-			ps.setString(3, producto.getUrlImagen());
-			ps.setBigDecimal(4, producto.getPrecio());
-			ps.setInt(5, producto.getDescuento());
-			ps.setString(6, producto.getUnidadMedida());
-			ps.setBigDecimal(7, producto.getPrecioUnidadMedida());
-			ps.setInt(8, producto.getCantidad());
-			ps.setLong(9, producto.getDepartamento().getId());
-			ps.setLong(10, producto.getId());
+			cs.setString(1, producto.getNombre());
+			cs.setString(2, producto.getDescripcion());
+			cs.setString(3, producto.getUrlImagen());
+			cs.setBigDecimal(4, producto.getPrecio());
+			cs.setInt(5, producto.getDescuento());
+			cs.setString(6, producto.getUnidadMedida());
+			cs.setBigDecimal(7, producto.getPrecioUnidadMedida());
+			cs.setInt(8, producto.getCantidad());
+			cs.setLong(9, producto.getDepartamento().getId());
+			cs.setLong(10, producto.getId());
 
-			int numeroRegistrosModificados = ps.executeUpdate();
+			int numeroRegistrosModificados = cs.executeUpdate();
 
 			if (numeroRegistrosModificados != 1) {
 				throw new AccesoDatosException("Se han modificado " + numeroRegistrosModificados + " registros");
@@ -181,17 +171,34 @@ public class ProductoDaoMySql implements Dao<Producto> {
 	@Override
 	public void eliminar(Long id) {
 		try (Connection con = obtenerConexion();
-				PreparedStatement ps = con.prepareCall(SQL_DELETE);) {
+				CallableStatement cs = con.prepareCall(SQL_DELETE);) {
 
-			ps.setLong(1, id);
+			cs.setLong(1, id);
 
-			int numeroRegistrosBorrados = ps.executeUpdate();
+			int numeroRegistrosBorrados = cs.executeUpdate();
 
 			if (numeroRegistrosBorrados != 1) {
 				throw new AccesoDatosException("Se han borrado " + numeroRegistrosBorrados + " registros");
 			}
 		} catch (SQLException e) {
 			throw new AccesoDatosException("No se ha podido borrar el producto " + id, e);
+		}
+	}
+	
+	@Override
+	public void recuperar(Long id) {
+		try (Connection con = obtenerConexion();
+				CallableStatement cs = con.prepareCall(SQL_UNDELETE);) {
+
+			cs.setLong(1, id);
+
+			int numeroRegistrosBorrados = cs.executeUpdate();
+
+			if (numeroRegistrosBorrados != 1) {
+				throw new AccesoDatosException("Se han recuperado " + numeroRegistrosBorrados + " registros");
+			}
+		} catch (SQLException e) {
+			throw new AccesoDatosException("No se ha podido recuperado el producto " + id, e);
 		}
 	}
 }

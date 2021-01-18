@@ -15,22 +15,29 @@ import com.ipartek.formacion.supermercado.modelos.Producto;
 @WebServlet("/admin/borrar")
 public class ProductoBorrarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
-		String deshacer = request.getParameter(name)
-		
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String sId = request.getParameter("id");
+		String deshacer = request.getParameter("deshacer");
+		Long id = Long.parseLong(sId);
+
 		Dao<Producto> dao = Configuracion.daoProductos;
-		
-		dao.eliminar(Long.parseLong(id));
-		
+
+		if (deshacer != null) {
+			dao.recuperar(id);
+		} else {
+			dao.eliminar(id);
+		}
+
 		request.setAttribute("alertaTexto", "Borrado efectuado correctamente");
 		request.setAttribute("alertaNivel", "success");
-		
+
 		request.getRequestDispatcher("/admin/index").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
