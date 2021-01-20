@@ -11,7 +11,7 @@ import com.ipartek.formacion.supermercado.modelos.Departamento;
 
 public class DepartamentoDaoMySql implements Dao<Departamento> {
 	private static final String URL = "jdbc:mysql://localhost:3306/supermercado?serverTimezone=UTC";
-	private static final String USER = "root";
+	private static final String USER = "";
 	private static final String PASS = "";
 
 	private static final String SQL_SELECT = "SELECT * FROM departamentos";
